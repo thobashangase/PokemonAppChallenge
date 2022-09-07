@@ -10,9 +10,10 @@ namespace Pokemon_Api.Controllers
         private readonly ILogger<PokemonController> _logger;
         private readonly IPokemonApiClient _pokemonApiClient;
 
-        public PokemonController(ILogger<PokemonController> logger)
+        public PokemonController(ILogger<PokemonController> logger, IPokemonApiClient pokemonApiClient)
         {
             _logger = logger;
+            _pokemonApiClient = pokemonApiClient;
         }
 
         [HttpGet]
