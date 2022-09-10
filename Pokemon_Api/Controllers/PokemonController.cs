@@ -19,11 +19,29 @@ namespace Pokemon_Api.Controllers
         [HttpGet]
         [ProducesResponseType(StatusCodes.Status200OK, Type = typeof(List<Pokemon>))]
         [ProducesResponseType(StatusCodes.Status500InternalServerError)]
-        public async Task<IActionResult> GetPokemons([FromQuery] string term)
+        public async Task<IActionResult> GetPokemons()
         {
             try
             {
-                var pokemons = await _pokemonApiClient.GetPokemonsAsync(term, cancellationToken: CancellationToken.None);
+                var pokemons = await _pokemonApiClient.GetPokemonsAsync(cancellationToken: CancellationToken.None);
+
+                return Ok(pokemons);
+            }
+            catch (Exception ex)
+            {
+                _logger.LogError(ex.Message);
+                return StatusCode(StatusCodes.Status500InternalServerError, ex);
+            }
+        }
+
+        [HttpGet("filtered/{term}")]
+        [ProducesResponseType(StatusCodes.Status200OK, Type = typeof(List<Pokemon>))]
+        [ProducesResponseType(StatusCodes.Status500InternalServerError)]
+        public async Task<IActionResult> GetPokemonsFiltered(string term)
+        {
+            try
+            {
+                var pokemons = await _pokemonApiClient.GetPokemonsFilteredAsync(term, cancellationToken: CancellationToken.None);
 
                 return Ok(pokemons);
             }
