@@ -1,42 +1,50 @@
-<div class="card">
-  <img src="{{ pokemon.sprites.other.home.front_default }}" class="card-img-top" alt="...">
-  <div class="card-body">
-    <h3 class="card-title">{{ pokemon.name | titlecase }}</h3>
-    <div class="card-text">
-      <section>
-        <h5>Type/s</h5>
-        <p>
-          <span *ngFor="let type of pokemon.types" class="badge rounded-pill bg-primary">
-            {{ type.type.name | titlecase }}
-          </span>
-        </p>
-        <hr />
-      </section>
-      <section>
-        <h5>Specs</h5>
-        <p><strong>Height: </strong>{{ pokemon.height }}</p>
-        <p><strong>Weight: </strong>{{ pokemon.weight }}</p>
-        <hr />
-      </section>
-      <section>
-        <h5>Abilities</h5>
-        <p>
-          <span *ngFor="let ability of pokemon.abilities" class="badge rounded-pill bg-success">
-            {{ ability.ability.name | titlecase }}
-          </span>
-        </p>
-        <hr />
-      </section>
-      <section>
-        <h5>Moves</h5>
-        <p>
-          <span *ngFor="let move of pokemon.moves" class="badge rounded-pill bg-warning text-dark">
-            {{ move.move.name | titlecase }}
-          </span>
-        </p>
-        <hr />
-      </section>
+<a [routerLink]="['/']" class="btn btn-primary">Back to list</a>
+<div class="card mb-3">
+  <div class="row g-0">
+    <div class="col-md-6">
+      <img src="{{ pokemon.sprites.other.home.front_default }}" class="img-fluid rounded-start"
+        alt="{{ pokemon.name }}">
     </div>
-    <a [routerLink]="['/']" class="btn btn-primary">Back to list</a>
+    <div class="col-md-6">
+      <div class="card-body">
+        <h3 class="card-title">{{ pokemon.name | titlecase }}</h3>
+        <div class="card-text">
+          <section>
+            <h5>Type/s</h5>
+            <p>
+              <span *ngFor="let type of pokemon.types" class="badge rounded-pill bg-primary">
+                {{ type.type.name | titlecase }}
+              </span>
+            </p>
+            <hr />
+          </section>
+          <section>
+            <h5>Specs</h5>
+            <p><strong>Height: </strong>{{ pokemon.height }}</p>
+            <p><strong>Weight: </strong>{{ pokemon.weight }}</p>
+            <hr />
+          </section>
+          <section>
+            <h5>Abilities</h5>
+            <p>
+              <span *ngFor="let ability of pokemon.abilities" class="badge rounded-pill bg-success">
+                {{ ability.ability.name | titlecase }}
+              </span>
+            </p>
+            <hr />
+          </section>
+          <section>
+            <h5>Moves</h5>
+            <p>
+              <span *ngFor="let move of pokemon.moves" class="badge rounded-pill bg-warning text-dark">
+                {{ move.move.name | titlecase }}
+              </span>
+            </p>
+            <hr />
+          </section>
+        </div>
+        <a [routerLink]="['/']" class="btn btn-primary">Back to list</a>
+      </div>
+    </div>
   </div>
 </div>
