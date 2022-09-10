@@ -11,8 +11,7 @@ builder.Services.AddCors(options =>
     options.AddPolicy(name: allowedOrigins,
                      policy =>
                      {
-                         policy.WithOrigins("http://localhost:4200",
-                                            "http://localhost:8888"); //localhost:8888 being the test port for Docker locally
+                         policy.AllowAnyOrigin().WithMethods("GET");
                      });
 });
 
