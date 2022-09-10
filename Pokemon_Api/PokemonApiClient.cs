@@ -16,7 +16,7 @@ namespace Pokemon_Api
         public async Task<List<Pokemon>> GetPokemonsAsync(CancellationToken cancellationToken)
         {
             var pokemons = await _httpClient.GetFromJsonAsync<PokemonJsonResponse>(
-                $"{_configuration.GetValue<string>("Pokemon:ApiBaseUrl")}/pokemon?offset=0&limit=100", cancellationToken);
+                $"{_configuration.GetValue<string>("Pokemon:ApiBaseUrl")}/{_configuration.GetValue<string>("Pokemon:ListEndpoint")}", cancellationToken);
 
 
             if (pokemons is null or { Results.Count: 0 })
@@ -35,7 +35,7 @@ namespace Pokemon_Api
             }
 
             var pokemons = await _httpClient.GetFromJsonAsync<PokemonJsonResponse>(
-                $"{_configuration.GetValue<string>("Pokemon:ApiBaseUrl")}/pokemon?offset=0&limit=100", cancellationToken);
+                $"{_configuration.GetValue<string>("Pokemon:ApiBaseUrl")}/{_configuration.GetValue<string>("Pokemon:ListEndpoint")}", cancellationToken);
 
 
             if (pokemons is null)
