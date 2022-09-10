@@ -1,16 +1,19 @@
+### STAGE 1: Build ###
 FROM node:16.13.0-alpine AS builder
 
 WORKDIR /app
 
+COPY package.json package-lock.json ./
+
+RUN npm install
+
 COPY . .
 
-ARG BUILDCONF
+RUN npm run build
 
-RUN npm install && \
-npm run build
-
+### STAGE 2: Run ###
 FROM nginx:alpine
 VOLUME /var/cache/nginx
 
-COPY --from=builder /app/dist/Pokemon_Frontend/* /usr/share/nginx/html/
+COPY --from=builder /app/dist/pokemon-frontend/* /usr/share/nginx/html/
 COPY nginx/default.conf /etc/nginx/conf.d/default.conf
