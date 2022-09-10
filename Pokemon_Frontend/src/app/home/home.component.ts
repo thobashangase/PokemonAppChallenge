@@ -1,7 +1,6 @@
 import { PokemonService } from './../services/pokemon.service';
 import { Component, OnInit } from '@angular/core';
-import { Router } from '@angular/router';
-import { concatMap, forkJoin, Observable, tap } from 'rxjs';
+import { concatMap, forkJoin, Observable, shareReplay, tap } from 'rxjs';
 
 @Component({
   selector: 'app-home',
@@ -30,7 +29,8 @@ export class HomeComponent implements OnInit {
       concatMap((pokemons: any) => {
         const networkRequestsToMake: Observable<any>[] = pokemons.map((pokemon: any) => this.pokemonService.getPokemonDetails(pokemon.url))
         return forkJoin([...networkRequestsToMake]);
-      })
+      }),
+      shareReplay(1)
     );
   }
 
