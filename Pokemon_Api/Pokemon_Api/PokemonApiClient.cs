@@ -13,18 +13,39 @@ namespace Pokemon_Api
             _httpClient = httpClient;
         }
 
-        public async Task<List<Pokemon>> GetPokemonsAsync(string term, CancellationToken cancellationToken)
+        public async Task<List<Pokemon>> GetPokemonsAsync(CancellationToken cancellationToken)
         {
-            var pokemon = await _httpClient.GetFromJsonAsync<PokemonJsonResponse>(
+            var pokemons = await _httpClient.GetFromJsonAsync<PokemonJsonResponse>(
                 $"{_configuration.GetValue<string>("Pokemon:ApiBaseUrl")}/pokemon?offset=0&limit=100", cancellationToken);
 
 
-            if (pokemon is null or { Results.Count: 0 })
+            if (pokemons is null or { Results.Count: 0 })
             {
                 throw new InvalidOperationException("Something went wrong while getting the list of Pokemons");
             }
 
-            return string.IsNullOrWhiteSpace(term) ? pokemon.Results : pokemon.Results.Where(x => x.Name.Contains(term)).ToList();
+            return pokemons.Results;
+        }
+
+        public async Task<List<Pokemon>> GetPokemonsFilteredAsync(string term, CancellationToken cancellationToken)
+        {
+            if (string.IsNullOrWhiteSpace(term))
+            {
+                throw new InvalidOperationException("The filter term is required");
+            }
+
+            var pokemons = await _httpClient.GetFromJsonAsync<PokemonJsonResponse>(
+                $"{_configuration.GetValue<string>("Pokemon:ApiBaseUrl")}/pokemon?offset=0&limit=100", cancellationToken);
+
+
+            if (pokemons is null)
+            {
+                throw new InvalidOperationException("Something went wrong while getting the list of Pokemons");
+            }
+
+            pokemons.Results = pokemons.Results.Where(x => x.Name.Contains(term)).ToList();
+
+            return pokemons.Results;
         }
     }
 }
