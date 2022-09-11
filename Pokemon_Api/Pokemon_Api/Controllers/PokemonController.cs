@@ -41,6 +41,11 @@ namespace Pokemon_Api.Controllers
         [ProducesResponseType(StatusCodes.Status500InternalServerError)]
         public async Task<IActionResult> GetFilteredAsync(string term)
         {
+            if (string.IsNullOrWhiteSpace(term))
+            {
+                return BadRequest(new { message = "Please provide a search term!" });
+            }
+
             try
             {
                 var pokemons = await _pokemonService.GetPokemonsFilteredAsync(term, cancellationToken: CancellationToken.None);
