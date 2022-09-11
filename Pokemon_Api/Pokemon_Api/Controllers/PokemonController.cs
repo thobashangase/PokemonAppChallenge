@@ -21,7 +21,7 @@ namespace Pokemon_Api.Controllers
         [HttpGet]
         [ProducesResponseType(StatusCodes.Status200OK, Type = typeof(List<Pokemon>))]
         [ProducesResponseType(StatusCodes.Status500InternalServerError)]
-        public async Task<IActionResult> GetPokemons()
+        public async Task<IActionResult> GetPokemonsAsync()
         {
             try
             {
@@ -39,7 +39,7 @@ namespace Pokemon_Api.Controllers
         [HttpGet("filtered/{term}")]
         [ProducesResponseType(StatusCodes.Status200OK, Type = typeof(List<Pokemon>))]
         [ProducesResponseType(StatusCodes.Status500InternalServerError)]
-        public async Task<IActionResult> GetPokemonsFiltered(string term)
+        public async Task<IActionResult> GetPokemonsFilteredAsync(string term)
         {
             try
             {
