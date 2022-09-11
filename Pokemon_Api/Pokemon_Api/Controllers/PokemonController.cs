@@ -1,5 +1,7 @@
 ﻿using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using Pokemon_Api.Models;
+using Pokemon_Api.Services;
 
 namespace Pokemon_Api.Controllers
 {
@@ -8,12 +10,12 @@ namespace Pokemon_Api.Controllers
     public class PokemonController : ControllerBase
     {
         private readonly ILogger<PokemonController> _logger;
-        private readonly IPokemonApiClient _pokemonApiClient;
+        private readonly IPokemonService _pokemonService;
 
-        public PokemonController(ILogger<PokemonController> logger, IPokemonApiClient pokemonApiClient)
+        public PokemonController(ILogger<PokemonController> logger, IPokemonService pokemonApiClient)
         {
             _logger = logger;
-            _pokemonApiClient = pokemonApiClient;
+            _pokemonService = pokemonApiClient;
         }
 
         [HttpGet]
@@ -23,7 +25,7 @@ namespace Pokemon_Api.Controllers
         {
             try
             {
-                var pokemons = await _pokemonApiClient.GetPokemonsAsync(cancellationToken: CancellationToken.None);
+                var pokemons = await _pokemonService.GetPokemonsAsync(cancellationToken: CancellationToken.None);
 
                 return Ok(pokemons);
             }
@@ -41,7 +43,7 @@ namespace Pokemon_Api.Controllers
         {
             try
             {
-                var pokemons = await _pokemonApiClient.GetPokemonsFilteredAsync(term, cancellationToken: CancellationToken.None);
+                var pokemons = await _pokemonService.GetPokemonsFilteredAsync(term, cancellationToken: CancellationToken.None);
 
                 return Ok(pokemons);
             }

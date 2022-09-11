@@ -1,4 +1,4 @@
-﻿namespace Pokemon_Api
+﻿namespace Pokemon_Api.Models
 {
     public class PokemonJsonResponse
     {

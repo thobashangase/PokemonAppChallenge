@@ -1,13 +1,14 @@
 ﻿using System.Threading;
+using Pokemon_Api.Models;
 
-namespace Pokemon_Api
+namespace Pokemon_Api.Services
 {
-    public class PokemonApiClient : IPokemonApiClient
+    public class PokemonService : IPokemonService
     {
         private readonly IConfiguration _configuration;
         private readonly HttpClient _httpClient;
 
-        public PokemonApiClient(IConfiguration configuration, HttpClient httpClient)
+        public PokemonService(IConfiguration configuration, HttpClient httpClient)
         {
             _configuration = configuration;
             _httpClient = httpClient;

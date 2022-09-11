@@ -1,6 +1,8 @@
-﻿namespace Pokemon_Api
+﻿using Pokemon_Api.Models;
+
+namespace Pokemon_Api.Services
 {
-    public interface IPokemonApiClient
+    public interface IPokemonService
     {
         Task<List<Pokemon>> GetPokemonsAsync(CancellationToken cancellationToken);
         Task<List<Pokemon>> GetPokemonsFilteredAsync(string term, CancellationToken cancellationToken);
