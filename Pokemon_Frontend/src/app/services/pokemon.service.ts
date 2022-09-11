@@ -5,7 +5,7 @@ import { Injectable } from '@angular/core';
   providedIn: 'root'
 })
 export class PokemonService {
-  apiBaseUrl = 'https://localhost:7180/api';
+  apiBaseUrl = 'https://thobashangase-pokemon-api.azurewebsites.net/api';
 
   constructor(private http: HttpClient) { }
 
